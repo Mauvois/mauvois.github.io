@@ -260,6 +260,7 @@ PLATFORMS
 DEPENDENCIES
   faraday-retry
   github-pages
+  jekyll-remote-theme
 
 BUNDLED WITH
    1.17.2
