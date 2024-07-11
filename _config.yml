@@ -1,3 +1,10 @@
+# _config.yml
+title: Your Site Title
+description: Your Site Description
 remote_theme: pages-themes/merlot@v0.2.0
 plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+  - jekyll-remote-theme
+
+# Optional settings
+show_downloads: false
+google_analytics: UA-XXXXXXXX-X

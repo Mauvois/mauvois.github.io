@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "[scss]": {
+    "editor.formatOnSave": false
+  },
+  "files.exclude": {
+    "**/assets/css/style.scss": true
+  }
+}
