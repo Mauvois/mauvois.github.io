@@ -15,15 +15,146 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
+    <style>
+        /* Additional styles for section layout */
+        section {
+            padding: 60px 20px;
+            scroll-margin-top: 80px;
+            /* Adjust this value if you change the height of the navbar */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Translucent background */
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .navbar ul li {
+            margin: 10px 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            /* Default white color */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            /* Smooth color transition */
+        }
+
+        .navbar.black ul li a {
+            color: black;
+            /* Change color to black when scrolled past banner */
+        }
+
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: block;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .hamburger div {
+            width: 100%;
+            height: 4px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        .hamburger.black div {
+            background-color: black;
+        }
+
+        .banner {
+            background-color: #157878;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .banner h2 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        .banner .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: white;
+            color: #157878;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .skills-box,
+        .project-box {
+            display: inline-block;
+            width: 45%;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .skills-box {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 
 <body>
-    <a id="skip-to-content" href="#content">Skip to the content.</a>
+    <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-    <header class="page-header" role="banner">
-        <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-        <h2 class="project-tagline">{{ page.description | default: site.description | default:
-            site.github.project_tagline }}</h2>
+    <div class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <header class="page-header banner" role="banner">
+        <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
+        <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
         {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
         {% endif %}
@@ -34,7 +165,72 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-        {{ content }}
+        <section id="home">
+            <div class="container">
+                <h1>Bonjour, je m'appelle Roger Mauvois</h1>
+                <p>Développeur fullstack + Spécialiste Data MLOps</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About</h2>
+                <a href="link-to-your-resume.pdf" class="btn">View My Resume</a>
+                <p>Here is a brief text presentation about myself...</p>
+                <video width="320" height="240" controls>
+                    <source src="link-to-your-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-box">
+                    <h3>FullStack Dev</h3>
+                    <p>Details about FullStack Development skills...</p>
+                </div>
+                <div class="skills-box">
+                    <h3>Data/MLOps</h3>
+                    <p>Details about Data and MLOps skills...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-box">
+                    <h3>I Ching App</h3>
+                    <p><a href="link-to-deployed-site">Deployed Site</a></p>
+                    <p><a href="link-to-github-code">Code</a></p>
+                </div>
+                <div class="project-box">
+                    <h3>QIP</h3>
+                    <video width="320" height="240" controls>
+                        <source src="link-to-qip-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p><a href="link-to-github-code">Code</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact</h2>
+                <form action="https://formspree.io/your-email" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
 
         <footer class="site-footer">
             {% if site.github.is_project_page %}
@@ -46,6 +242,42 @@
                     Pages</a>.</span>
         </footer>
     </main>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('.navbar a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                document.querySelector('.navbar').style.display = 'none';
+            });
+        });
+
+        // Toggle navbar visibility
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            var navbar = document.querySelector('.navbar');
+            if (navbar.style.display === 'flex') {
+                navbar.style.display = 'none';
+            } else {
+                navbar.style.display = 'flex';
+            }
+        });
+
+        // Change hamburger and navbar link colors on scroll
+        window.addEventListener('scroll', function () {
+            var hamburger = document.querySelector('.hamburger');
+            var navbar = document.querySelector('.navbar');
+            if (window.scrollY > document.querySelector('.banner').offsetHeight) {
+                hamburger.classList.add('black');
+                navbar.classList.add('black');
+            } else {
+                hamburger.classList.remove('black');
+                navbar.classList.remove('black');
+            }
+        });
+    </script>
 </body>
 
 </html>
