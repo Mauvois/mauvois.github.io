@@ -41,7 +41,7 @@
             flex-direction: column;
             align-items: right;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 0px;
             box-shadow: none;
             transition: background-color 0.5s ease;
             /* Smooth transition for background color */
@@ -69,6 +69,12 @@
         .navbar.expanded ul li a {
             color: white;
             font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .navbar.expanded ul li a.visible {
+            opacity: 1;
         }
 
         .navbar ul {
@@ -87,12 +93,12 @@
             /* Default white color */
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
-            /* Smooth color transition */
+            transition: color 0.3s, opacity 0.5s ease;
+            /* Smooth color and opacity transition */
         }
 
         .navbar.black ul li a {
-            color: black;
+            color: white;
             /* Change color to black when scrolled past banner */
         }
 
@@ -117,6 +123,10 @@
 
         .hamburger.black div {
             background-color: black;
+        }
+
+        .hamburger.hidden {
+            display: none;
         }
 
         .banner {
@@ -303,12 +313,26 @@
 
                 if (window.scrollY > threshold) {
                     hamburger.classList.add('black');
+                    hamburger.classList.add('hidden');
                     navbar.classList.add('black');
                     navbar.classList.add('expanded');
+
+                    // Make the navbar links visible with a delay for smooth transition
+                    setTimeout(function () {
+                        document.querySelectorAll('.navbar.expanded ul li a').forEach(function (link) {
+                            link.classList.add('visible');
+                        });
+                    }, 10);
                 } else {
                     hamburger.classList.remove('black');
+                    hamburger.classList.remove('hidden');
                     navbar.classList.remove('black');
                     navbar.classList.remove('expanded');
+
+                    // Hide the navbar links immediately
+                    document.querySelectorAll('.navbar ul li a').forEach(function (link) {
+                        link.classList.remove('visible');
+                    });
                 }
             });
         });
