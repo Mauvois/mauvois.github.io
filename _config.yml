@@ -1,5 +1,5 @@
-title: Mauvois — Portfolio
-description: Portfolio Site displaying some of my projects
+title: Roger MAUVOIS
+description: Développeur fullstack — Data MLOps.
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme # add this line to the plugins list if you already have one

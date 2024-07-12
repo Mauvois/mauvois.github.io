@@ -30,25 +30,52 @@
         }
 
         .navbar {
-            position: absolute;
-            top: 70px;
-            right: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            /* Translucent background */
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0);
+            /* Translucent background initially */
             z-index: 1000;
             display: none;
             flex-direction: column;
-            align-items: center;
+            align-items: right;
             padding: 10px 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: none;
+            transition: background-color 0.5s ease;
+            /* Smooth transition for background color */
+        }
+
+        .navbar.expanded {
+            display: flex !important;
+            background: linear-gradient(120deg, #155799, #159957);
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar.expanded ul {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .navbar.expanded ul li {
+            margin: 0;
+        }
+
+        .navbar.expanded ul li a {
+            color: white;
+            font-weight: bold;
         }
 
         .navbar ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            text-align: center;
+            text-align: right;
         }
 
         .navbar ul li {
@@ -93,7 +120,8 @@
         }
 
         .banner {
-            background-color: #157878;
+            background-color: #159957;
+            background-image: linear-gradient(120deg, #155799, #159957);
             color: white;
             padding: 60px 20px;
             text-align: center;
@@ -115,7 +143,7 @@
             margin-top: 20px;
             padding: 10px 20px;
             background-color: white;
-            color: #157878;
+            color: #159957;
             text-decoration: none;
             font-weight: bold;
         }
@@ -144,10 +172,10 @@
 
     <div class="navbar">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#about">Qui suis-je?</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#projects">Projets</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
@@ -156,7 +184,7 @@
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
         {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+        <a href="{{ site.github.repository_url }}" class="btn">GitHub</a>
         {% endif %}
         {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
@@ -167,14 +195,14 @@
     <main id="content" class="main-content" role="main">
         <section id="home">
             <div class="container">
-                <h1>Bonjour, je m'appelle Roger Mauvois</h1>
+                <h1>Bonjour, bienvenue dans mon portfolio.</h1>
                 <p>Développeur fullstack + Spécialiste Data MLOps</p>
             </div>
         </section>
 
         <section id="about">
             <div class="container">
-                <h2>About</h2>
+                <h2>Qui suis-je?</h2>
                 <a href="link-to-your-resume.pdf" class="btn">View My Resume</a>
                 <p>Here is a brief text presentation about myself...</p>
                 <video width="320" height="240" controls>
@@ -186,7 +214,7 @@
 
         <section id="skills">
             <div class="container">
-                <h2>Skills</h2>
+                <h2>Compétences</h2>
                 <div class="skills-box">
                     <h3>FullStack Dev</h3>
                     <p>Details about FullStack Development skills...</p>
@@ -200,7 +228,7 @@
 
         <section id="projects">
             <div class="container">
-                <h2>Projects</h2>
+                <h2>Projets</h2>
                 <div class="project-box">
                     <h3>I Ching App</h3>
                     <p><a href="link-to-deployed-site">Deployed Site</a></p>
@@ -244,38 +272,45 @@
     </main>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('.navbar a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scrolling
+            document.querySelectorAll('.navbar a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    document.querySelector('.navbar').style.display = 'none';
                 });
-                document.querySelector('.navbar').style.display = 'none';
             });
-        });
 
-        // Toggle navbar visibility
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            var navbar = document.querySelector('.navbar');
-            if (navbar.style.display === 'flex') {
-                navbar.style.display = 'none';
-            } else {
-                navbar.style.display = 'flex';
-            }
-        });
+            // Toggle navbar visibility
+            document.querySelector('.hamburger').addEventListener('click', function () {
+                var navbar = document.querySelector('.navbar');
+                if (navbar.style.display === 'flex') {
+                    navbar.style.display = 'none';
+                } else {
+                    navbar.style.display = 'flex';
+                }
+            });
 
-        // Change hamburger and navbar link colors on scroll
-        window.addEventListener('scroll', function () {
-            var hamburger = document.querySelector('.hamburger');
-            var navbar = document.querySelector('.navbar');
-            if (window.scrollY > document.querySelector('.banner').offsetHeight) {
-                hamburger.classList.add('black');
-                navbar.classList.add('black');
-            } else {
-                hamburger.classList.remove('black');
-                navbar.classList.remove('black');
-            }
+            // Change hamburger and navbar link colors on scroll
+            window.addEventListener('scroll', function () {
+                var hamburger = document.querySelector('.hamburger');
+                var navbar = document.querySelector('.navbar');
+                var bannerHeight = document.querySelector('.banner').offsetHeight;
+                var threshold = bannerHeight / 1.25;  // Change this value as needed
+
+                if (window.scrollY > threshold) {
+                    hamburger.classList.add('black');
+                    navbar.classList.add('black');
+                    navbar.classList.add('expanded');
+                } else {
+                    hamburger.classList.remove('black');
+                    navbar.classList.remove('black');
+                    navbar.classList.remove('expanded');
+                }
+            });
         });
     </script>
 </body>
