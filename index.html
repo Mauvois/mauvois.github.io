@@ -28,6 +28,20 @@
             text-align: center;
         }
 
+        .skills-container,
+        .projects-container {
+            display: flex;
+            /* Use flexbox for layout */
+            flex-wrap: wrap;
+            /* Allow items to wrap onto the next line */
+            justify-content: space-between;
+            /* Space the items evenly */
+            align-items: stretch;
+            /* Stretch items to have the same height */
+            gap: 20px;
+            /* Adds space between the boxes */
+        }
+
         .navbar {
             position: fixed;
             top: 0;
@@ -159,20 +173,20 @@
 
         .skills-box,
         .project-box {
-            display: inline-block;
-            width: 45%;
-            height: auto;
-            padding: 20px;
+            background-color: #f9f9f9;
+            flex: 1 1 calc(45% - 20px);
+            /* Adjust width, maintaining margins */
             margin: 10px;
+            padding: 20px;
             border: 1px solid #ccc;
             background-size: cover;
             background-position: center;
             position: relative;
             text-align: center;
-        }
-
-        .skills-box {
-            background-color: #f9f9f9;
+            aspect-ratio: 1 / 1;
+            /* Ensures the element is a perfect square */
+            box-sizing: border-box;
+            /* Includes padding and border in width/height */
         }
 
         .site-title a {
@@ -279,13 +293,16 @@
         <section id="skills">
             <div class="container">
                 <h2>Compétences</h2>
-                <div class="skills-box">
-                    <h3>FullStack Dev</h3>
-                    <p>Details about FullStack Development skills...</p>
-                </div>
-                <div class="skills-box">
-                    <h3>Data/MLOps</h3>
-                    <p>Details about Data and MLOps skills...</p>
+                <!-- New wrapper for the skills boxes -->
+                <div class="skills-container">
+                    <div class="skills-box">
+                        <h3>FullStack Dev</h3>
+                        <p>Details about FullStack Development skills...</p>
+                    </div>
+                    <div class="skills-box">
+                        <h3>Data/MLOps</h3>
+                        <p>Details about Data and MLOps skills...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -293,20 +310,21 @@
         <section id="projects">
             <div class="container">
                 <h2>Projets</h2>
-                <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="project-box"
-                    style="background-image: url('/assets/iching-image.png');">
-                    <h3>I Ching App</h3>
-                    <p>Click to visit the deployed site</p>
-                </a>
-
-
-                <div class="project-box">
-                    <h3>QIP</h3>
-                    <video width="320" height="240" controls>
-                        <source src="link-to-qip-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <p><a href="link-to-github-code">Code</a></p>
+                <!-- New wrapper for the project boxes -->
+                <div class="projects-container">
+                    <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="project-box"
+                        style="background-image: url('/assets/iching-image.png');">
+                        <h3>I Ching App</h3>
+                        <p>Click to visit the deployed site</p>
+                    </a>
+                    <div class="project-box">
+                        <h3>QIP</h3>
+                        <video width="320" height="240" controls>
+                            <source src="link-to-qip-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p><a href="link-to-github-code">Code</a></p>
+                    </div>
                 </div>
             </div>
         </section>
