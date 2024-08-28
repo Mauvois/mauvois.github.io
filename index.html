@@ -221,7 +221,8 @@
             bottom: 20px;
             left: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: none;
+            /* Remove the dark grey background */
             color: white;
             margin: 0;
             padding: 10px;
@@ -231,6 +232,8 @@
             top: 20px;
             left: 20px;
             right: 20px;
+            background: none;
+            /* Remove the dark grey background */
         }
     </style>
 </head>
@@ -296,12 +299,23 @@
                 <!-- New wrapper for the skills boxes -->
                 <div class="skills-container">
                     <div class="skills-box">
-                        <h3>FullStack Dev</h3>
-                        <p>Details about FullStack Development skills...</p>
+                        <h3>Développeur Fullstack</h3>
+                        <p>Python, Django, FastAPI, Flask, Dash</p>
+                        <p>HTML, CSS, SQL, JavaScript, Vue.js</p>
+                        <p>CI/CD, Docker, GitHub</p>
+                        <p>Cloud Services GCP: IAM, CloudRun, Storage</p>
+                        <p>Agile: Kanban, Sprint, Pomodoro</p>
+                        <p>Esprit critique, force de proposition</p>
+                        <p>Capacité d’analyse et de synthèse</p>
+                        <p>Méthode stricte de documentation</p>
+                        <p>Adaptabilité des solutions en termes de ressources et de temps</p>
                     </div>
                     <div class="skills-box">
                         <h3>Data/MLOps</h3>
-                        <p>Details about Data and MLOps skills...</p>
+                        <p>ML & AI: pandas, numpy, scikit-learn, TensorFlow, Keras, PyTorch, Xgboost, Vertex AI,
+                            Langchain</p>
+                        <p>Visualisation: Looker, Plotly, Matplotlib</p>
+                        <p>Cloud Services GCP: Vertex AI, BigQuery</p>
                     </div>
                 </div>
             </div>
@@ -332,17 +346,23 @@
         <section id="contact">
             <div class="container">
                 <h2>Contact</h2>
-                <form action="https://formspree.io/your-email" method="POST">
+                <form action="https://formspree.io/f/xqazndll" method="POST">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" required></textarea>
+
+                    <!-- Honeypot field for spam protection -->
+                    <input type="text" name="_gotcha" style="display:none">
+
                     <button type="submit">Send</button>
                 </form>
+
             </div>
         </section>
+
 
         <footer class="site-footer">
             {% if site.github.is_project_page %}
