@@ -179,7 +179,11 @@
         .project-box {
             background-color: #f9f9f9;
             flex: 1 1 calc(45% - 20px);
-            /* Adjust width, maintaining margins */
+            /* Flex properties to maintain size consistency */
+            max-width: calc(45% - 20px);
+            /* Set maximum width for consistency */
+            height: 300px;
+            /* Set fixed height */
             margin: 10px;
             padding: 20px;
             border: 1px solid #ccc;
@@ -187,10 +191,14 @@
             background-position: center;
             position: relative;
             text-align: center;
-            aspect-ratio: 1 / 1;
-            /* Ensures the element is a perfect square */
             box-sizing: border-box;
-            /* Includes padding and border in width/height */
+            /* Ensures padding and border are included in width/height */
+            display: flex;
+            /* Use flexbox for internal content alignment */
+            flex-direction: column;
+            /* Arrange children vertically */
+            justify-content: space-between;
+            /* Space content evenly */
         }
 
         .site-title a {
@@ -226,7 +234,6 @@
             left: 20px;
             right: 20px;
             background: none;
-            /* Remove the dark grey background */
             color: white;
             margin: 0;
             padding: 10px;
@@ -237,13 +244,11 @@
             left: 20px;
             right: 20px;
             background: none;
-            /* Remove the dark grey background */
         }
 
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
             max-width: 100%;
@@ -348,15 +353,19 @@
             background-color: #137e56;
         }
 
-        /* Removed the icon styling by deleting these selectors:
-.input-container::before,
-.input-container:first-child::before,
-.input-container:last-child::before
-*/
-
         @media (max-width: 600px) {
             .form-group {
                 flex-direction: column;
+            }
+
+            .skills-box,
+            .project-box {
+                height: auto;
+                /* Allow auto height for responsiveness on smaller screens */
+                max-width: 100%;
+                /* Use full width */
+                flex: 1 1 100%;
+                /* Full-width flex settings */
             }
         }
     </style>
@@ -401,18 +410,17 @@
                 <h1>Bonjour, <br>bienvenue dans mon portfolio.</h1>
             </div>
         </section>
-        s
         <section id="about">
             <div class="container">
                 <h2>Qui suis-je?</h2>
                 <a href="assets/BASE.pdf" class="btn" target="_blank" download>Voir mon CV</a>
                 <p>Développeur fullstack, je me spécialise dans la gestion complète de la chaîne de valorisation des
-                    données. Mon expertise me permet de prendre en charge des projets complexes, de l'ingestion des
-                    données à la mise en production d'applications et de microservices, incluant des solutions de
-                    Machine Learning et d'IA. Fort de ma capacité à travailler en équipe et de mon approche analytique
-                    orientée vers l'innovation, je conçois des solutions parfaitement adaptées aux besoins de mes
-                    partenaires et aux ressources disponibles. Je suis prêt à commencer mes nouvelles collaborations
-                    immédiatement.</p>
+                    données. Mon expertise me permet de prendre en charge des projets complexes, de l'analyse des
+                    besoins métier, à la mise en production d'applications et de microservices, incluant des solutions
+                    de Machine Learning et d'IA. Fort de ma capacité à travailler en équipe et de mon approche
+                    analytique orientée vers l'innovation, je conçois des solutions parfaitement adaptées aux besoins de
+                    mes partenaires et aux ressources disponibles. Je suis à la recherche de nouvelles collaborations..
+                </p>
 
                 <!-- Embedded YouTube Video -->
                 <div class="video-container">
@@ -423,11 +431,9 @@
             </div>
         </section>
 
-
         <section id="skills">
             <div class="container">
                 <h2>Compétences</h2>
-                <!-- New wrapper for the skills boxes -->
                 <div class="skills-container">
                     <div class="skills-box">
                         <h3>Développeur Fullstack</h3>
@@ -455,7 +461,6 @@
         <section id="projects">
             <div class="container">
                 <h2>Projets</h2>
-                <!-- New wrapper for the project boxes -->
                 <div class="projects-container">
                     <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="project-box"
                         style="background-image: url('/assets/iching-image.png');">
@@ -497,8 +502,6 @@
                 </form>
             </div>
         </section>
-
-
 
         <footer class="site-footer">
             {% if site.github.is_project_page %}
