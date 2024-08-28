@@ -18,7 +18,7 @@
     <style>
         /* Additional styles for section layout */
         section {
-            padding: 60px 20px;
+            padding: 3%;
             scroll-margin-top: 80px;
         }
 
@@ -153,12 +153,16 @@
         .banner h1 {
             margin: 0;
             font-size: 2.5em;
+            margin-bottom: 10px;
+            line-height: 1.2;
         }
 
         .banner h2 {
             margin: 0;
             font-size: 1.5em;
             font-weight: 300;
+            margin-bottom: 10px;
+            line-height: 1.2;
         }
 
         .banner .btn {
@@ -235,6 +239,126 @@
             background: none;
             /* Remove the dark grey background */
         }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #contact {
+            padding: 60px 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        #contact .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #159957;
+        }
+
+        #contact p {
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-container input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-container input:focus,
+        .form-group textarea:focus {
+            border-color: #159957;
+            background-color: #fff;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+
+        textarea:focus {
+            border-color: #159957;
+            background-color: #fff;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: #159957;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #137e56;
+        }
+
+        /* Removed the icon styling by deleting these selectors:
+.input-container::before,
+.input-container:first-child::before,
+.input-container:last-child::before
+*/
+
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 
@@ -258,27 +382,30 @@
     <header class="page-header banner" role="banner">
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">GitHub</a>
-        {% endif %}
-        {% if site.show_downloads %}
-        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-        {% endif %}
+        <br>
+        <!-- Replace the GitHub button with LinkedIn and GitHub logos -->
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/roger-mauvois-29a992208/" target="_blank">
+                <img src="/assets/In-White-40.png" alt="LinkedIn"
+                    style="width: 40px; height: 40px; margin-right: 30px;">
+            </a>
+            <a href="https://github.com/Mauvois" target="_blank">
+                <img src="/assets/github-mark-white.png" alt="GitHub" style="width: 40px; height: 40px;">
+            </a>
+        </div>
     </header>
 
     <main id="content" class="main-content" role="main">
         <section id="home">
             <div class="container">
-                <h1>Bonjour, bienvenue dans mon portfolio.</h1>
-                <p>Développeur fullstack + Spécialiste Data MLOps</p>
+                <h1>Bonjour, <br>bienvenue dans mon portfolio.</h1>
             </div>
         </section>
-
+        s
         <section id="about">
             <div class="container">
                 <h2>Qui suis-je?</h2>
-                <a href="link-to-your-resume.pdf" class="btn">View My Resume</a>
+                <a href="assets/BASE.pdf" class="btn" target="_blank" download>Voir mon CV</a>
                 <p>Développeur fullstack, je me spécialise dans la gestion complète de la chaîne de valorisation des
                     données. Mon expertise me permet de prendre en charge des projets complexes, de l'ingestion des
                     données à la mise en production d'applications et de microservices, incluant des solutions de
@@ -286,12 +413,16 @@
                     orientée vers l'innovation, je conçois des solutions parfaitement adaptées aux besoins de mes
                     partenaires et aux ressources disponibles. Je suis prêt à commencer mes nouvelles collaborations
                     immédiatement.</p>
-                <video width="320" height="240" controls>
-                    <source src="link-to-your-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+
+                <!-- Embedded YouTube Video -->
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/2u2WeMFp49U" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
             </div>
         </section>
+
 
         <section id="skills">
             <div class="container">
@@ -346,22 +477,27 @@
         <section id="contact">
             <div class="container">
                 <h2>Contact</h2>
+                <p>Restons en contact ! N'hésitez pas à m'ajouter sur LinkedIn, et/ou me laisser un message et
+                    vos coordonnées. Je vous recontacterai dans les meilleurs délais.</p>
                 <form action="https://formspree.io/f/xqazndll" method="POST">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
-
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                        </div>
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" placeholder="Votre Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Message" rows="5" required></textarea>
+                    </div>
                     <!-- Honeypot field for spam protection -->
                     <input type="text" name="_gotcha" style="display:none">
-
-                    <button type="submit">Send</button>
+                    <button type="submit" class="btn">Envoyer message</button>
                 </form>
-
             </div>
         </section>
+
 
 
         <footer class="site-footer">
