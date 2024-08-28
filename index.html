@@ -2,7 +2,7 @@
 ---
 
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
+<html lang="{{ site.lang | default: 'en-US' }}">
 
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,6 @@
         section {
             padding: 60px 20px;
             scroll-margin-top: 80px;
-            /* Adjust this value if you change the height of the navbar */
         }
 
         .container {
@@ -35,7 +34,6 @@
             right: 0;
             left: 0;
             background-color: rgba(0, 0, 0, 0);
-            /* Translucent background initially */
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -44,21 +42,25 @@
             border-radius: 0px;
             box-shadow: none;
             transition: background-color 0.5s ease;
-            /* Smooth transition for background color */
         }
 
         .navbar.expanded {
             display: flex !important;
             background: linear-gradient(120deg, #155799, #159957);
-            padding: 10px 20px;
+            padding: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             justify-content: center;
             align-items: center;
         }
 
+        .navbar.menu-open {
+            padding-top: 60px;
+        }
+
         .navbar.expanded ul {
             display: flex;
             justify-content: space-around;
+            align-items: center;
             width: 100%;
         }
 
@@ -90,16 +92,13 @@
 
         .navbar ul li a {
             color: white;
-            /* Default white color */
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s, opacity 0.5s ease;
-            /* Smooth color and opacity transition */
         }
 
         .navbar.black ul li a {
             color: white;
-            /* Change color to black when scrolled past banner */
         }
 
         .hamburger {
@@ -162,13 +161,62 @@
         .project-box {
             display: inline-block;
             width: 45%;
+            height: auto;
             padding: 20px;
             margin: 10px;
             border: 1px solid #ccc;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
         }
 
         .skills-box {
             background-color: #f9f9f9;
+        }
+
+        .site-title a {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .site-title a:hover {
+            color: #159957;
+        }
+
+        .navbar .site-title {
+            display: none;
+        }
+
+        .navbar.expanded .site-title {
+            display: block;
+        }
+
+        .hamburger.hidden {
+            display: none;
+        }
+
+        .project-box h3,
+        .project-box p {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .project-box h3 {
+            top: 20px;
+            left: 20px;
+            right: 20px;
         }
     </style>
 </head>
@@ -182,7 +230,7 @@
 
     <div class="navbar">
         <ul>
-            <li><a href="#home">Accueil</a></li>
+            <li class="site-title"><a href="#home">Roger MAUVOIS</a></li>
             <li><a href="#about">Qui suis-je?</a></li>
             <li><a href="#skills">Compétences</a></li>
             <li><a href="#projects">Projets</a></li>
@@ -214,7 +262,13 @@
             <div class="container">
                 <h2>Qui suis-je?</h2>
                 <a href="link-to-your-resume.pdf" class="btn">View My Resume</a>
-                <p>Here is a brief text presentation about myself...</p>
+                <p>Développeur fullstack, je me spécialise dans la gestion complète de la chaîne de valorisation des
+                    données. Mon expertise me permet de prendre en charge des projets complexes, de l'ingestion des
+                    données à la mise en production d'applications et de microservices, incluant des solutions de
+                    Machine Learning et d'IA. Fort de ma capacité à travailler en équipe et de mon approche analytique
+                    orientée vers l'innovation, je conçois des solutions parfaitement adaptées aux besoins de mes
+                    partenaires et aux ressources disponibles. Je suis prêt à commencer mes nouvelles collaborations
+                    immédiatement.</p>
                 <video width="320" height="240" controls>
                     <source src="link-to-your-video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -239,11 +293,13 @@
         <section id="projects">
             <div class="container">
                 <h2>Projets</h2>
-                <div class="project-box">
+                <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="project-box"
+                    style="background-image: url('/assets/iching-image.png');">
                     <h3>I Ching App</h3>
-                    <p><a href="link-to-deployed-site">Deployed Site</a></p>
-                    <p><a href="link-to-github-code">Code</a></p>
-                </div>
+                    <p>Click to visit the deployed site</p>
+                </a>
+
+
                 <div class="project-box">
                     <h3>QIP</h3>
                     <video width="320" height="240" controls>
@@ -299,8 +355,10 @@
                 var navbar = document.querySelector('.navbar');
                 if (navbar.style.display === 'flex') {
                     navbar.style.display = 'none';
+                    navbar.classList.remove('menu-open');
                 } else {
                     navbar.style.display = 'flex';
+                    navbar.classList.add('menu-open');
                 }
             });
 
@@ -309,11 +367,23 @@
                 var hamburger = document.querySelector('.hamburger');
                 var navbar = document.querySelector('.navbar');
                 var bannerHeight = document.querySelector('.banner').offsetHeight;
-                var threshold = bannerHeight / 1.25;  // Change this value as needed
+                var threshold = bannerHeight / 1.25;
+
+                // Close hamburger menu on scroll and hide hamburger icon
+                if (navbar.style.display === 'flex') {
+                    navbar.style.display = 'none';
+                    navbar.classList.remove('menu-open');
+                }
+
+                // Hide the hamburger icon on scroll
+                if (window.scrollY > 0) {
+                    hamburger.classList.add('hidden');
+                } else {
+                    hamburger.classList.remove('hidden');
+                }
 
                 if (window.scrollY > threshold) {
                     hamburger.classList.add('black');
-                    hamburger.classList.add('hidden');
                     navbar.classList.add('black');
                     navbar.classList.add('expanded');
 
@@ -325,7 +395,6 @@
                     }, 10);
                 } else {
                     hamburger.classList.remove('black');
-                    hamburger.classList.remove('hidden');
                     navbar.classList.remove('black');
                     navbar.classList.remove('expanded');
 
