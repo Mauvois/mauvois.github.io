@@ -142,6 +142,8 @@
             display: none;
         }
 
+
+
         .banner {
             background-color: #159957;
             background-image: linear-gradient(120deg, #155799, #159957);
@@ -401,6 +403,7 @@
             flex-direction: column;
             justify-content: space-between;
             height: auto;
+
         }
 
         .skills-box:first-child {
@@ -414,6 +417,7 @@
             /* Allow the list to grow and fill the box */
             margin: 0;
             padding: 0;
+            list-style-type: none;
         }
 
         .skills-box h3 {
@@ -433,6 +437,40 @@
 
         .skills-box li strong {
             color: #333;
+        }
+
+        .navbar {
+            display: none;
+            /* Hide the navbar initially */
+            flex-direction: column;
+            align-items: right;
+            padding: 10px 20px;
+            transition: background-color 0.5s ease;
+        }
+
+        .hamburger {
+            display: block;
+            /* Ensure the hamburger menu is visible initially */
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        /* Media query to handle small screens specifically */
+        @media (max-width: 600px) {
+            .navbar {
+                display: none;
+                /* Keep navbar hidden for small screens */
+            }
+
+            .hamburger {
+                display: block;
+                /* Hamburger should be visible */
+            }
         }
     </style>
 </head>
@@ -490,7 +528,7 @@
 
                 <!-- Embedded YouTube Video -->
                 <div class="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/2u2WeMFp49U" frameborder="0"
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/_aEjec4EpHw" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 </div>
@@ -504,44 +542,52 @@
                     <div class="skills-box">
                         <h3>Développement</h3>
                         <ul>
-                            <li><strong>Stack :</strong> Python, Django, FastAPI, Flask, Dash, HTML, CSS, JavaScript,
-                                Vue.js</li>
-                            <li><strong>DevOps:</strong> CI/CD, Docker, GitHub</li>
-                            <li><strong>Cloud :</strong> GCP (IAM, CloudRun, Storage, VertexAI)</li>
-                            <li><strong>Agile :</strong> Kanban, Sprint, Pomodoro</li>
+                            <li><strong>Backend :</strong> Python, Django, FastAPI, Flask</li>
+                            <li><strong>Frontend :</strong> , Dash, HTML, CSS, JavaScript (Vue.js)</li>
+                            <li><strong>Bases de données :</strong> SQL, Postgres, Bigquery</li>
+                            <li><strong>Architectures :</strong> Single Page Applications, Microservices</li>
+                            <li><strong>DevOps :</strong> CI/CD, Docker, GitHub</li>
+                            <li><strong>Cloud :</strong> GCP (IAM, CloudRun, Storage, Compute Engine)</li>
                         </ul>
                     </div>
                     <div class="skills-box">
                         <h3>Data/MLOps</h3>
                         <ul>
-                            <li><strong>Machine Learning & AI:</strong> pandas, numpy, scikit-learn, TensorFlow, Keras,
-                                PyTorch, Xgboost, Vertex AI, Langchain</li>
-                            <li><strong>Visualisation de Données:</strong> Looker, Plotly, Matplotlib</li>
+                            <li><strong>Prétraitement des données :</strong> pandas, numpy</li>
+                            <li><strong>Modélisation : Statistiques ML & Deep Learning :</strong> statsmodels,
+                                scikit-learn,
+                                TensorFlow,
+                                Keras, PyTorch, Xgboost</li>
+                            <li><strong>Machine Learning & AI :</strong> Vertex AI, Langchain</li>
+                            <li><strong>Visualisation de Données :</strong> Looker, Plotly, Matplotlib</li>
                         </ul>
                     </div>
                     <div class="skills-box">
-                        <h3>Générales</h3>
+                        <h3>Compétences Techniques Générales</h3>
                         <ul>
-                            <li><strong>Force de proposition:</strong> Capacité à apporter des idées innovantes</li>
-                            <li><strong>Capacité d’analyse et de synthèse:</strong> Résolution de problèmes complexes
+                            <li><strong>Méthodologies de travail :</strong> Kanban, Sprint, Pomodoro</li>
+                            <li><strong>Débogage et Documentation :</strong> Capacité à documenter et à résoudre les
+                                problèmes efficacement</li>
+                            <li><strong>Force de proposition :</strong> Capacité à apporter des idées innovantes</li>
+                            <li><strong>Capacité d’analyse et de synthèse :</strong> Résolution de problèmes complexes
                             </li>
-                            <li><strong>Méthode:</strong> Documentation et débogage</li>
-                            <li><strong>Adaptabilité:</strong> Adaptabilité des solutions</li>
                         </ul>
                     </div>
                     <div class="skills-box">
                         <h3>Soft Skills</h3>
                         <ul>
-                            <li><strong>Communication:</strong> Collaboration et interaction efficace avec les équipes
+                            <li><strong>Communication :</strong> Collaboration et interaction efficace avec les équipes
                             </li>
-                            <li><strong>Leadership:</strong> Capacité à diriger des équipes de projet</li>
-                            <li><strong>Gestion du temps:</strong> Priorisation et gestion des tâches multiples</li>
-                            <li><strong>Esprit critique:</strong> Capacité à analyser et à améliorer les processus</li>
+                            <li><strong>Leadership :</strong> Capacité à diriger des équipes de projet</li>
+                            <li><strong>Gestion du temps :</strong> Priorisation et gestion des tâches multiples</li>
+                            <li><strong>Esprit critique :</strong> Capacité à analyser et à améliorer les processus</li>
+                            <li><strong>Adaptabilité :</strong> Adaptabilité des solutions</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <section id="projects">
             <div class="container">
