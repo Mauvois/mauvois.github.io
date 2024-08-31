@@ -31,15 +31,10 @@
         .skills-container,
         .projects-container {
             display: flex;
-            /* Use flexbox for layout */
             flex-wrap: wrap;
-            /* Allow items to wrap onto the next line */
             justify-content: space-between;
-            /* Space the items evenly */
             align-items: stretch;
-            /* Stretch items to have the same height */
             gap: 20px;
-            /* Adds space between the boxes */
         }
 
         .navbar {
@@ -61,14 +56,14 @@
         .navbar.expanded {
             display: flex !important;
             background: linear-gradient(120deg, #155799, #159957);
-            padding: 20px;
+            padding: 0px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             justify-content: center;
             align-items: center;
         }
 
         .navbar.menu-open {
-            padding-top: 60px;
+            padding-top: 50px;
         }
 
         .navbar.expanded ul {
@@ -227,24 +222,44 @@
             max-width: calc(45% - 20px);
             height: 300px;
             margin: 10px;
-            padding: 20px;
-            border: 1px solid #ccc;
+            padding: 0;
+            /* Remove padding */
+            border: none;
+            /* Remove borders */
             background-size: cover;
             background-position: center;
             position: relative;
             text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            /* Align content to the top */
+            align-items: stretch;
+            /* Make sure children stretch to full width */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-radius: 8px;
+            overflow: hidden;
         }
+
+        .project-item img,
+        .project-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Make sure the video and image cover the entire box */
+            border-radius: 8px;
+            /* Optional: match the box's rounded corners */
+            display: block;
+        }
+
 
         .project-item:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
+
+
 
         .project-item .github-link {
             position: absolute;
@@ -264,6 +279,12 @@
             color: white;
         }
 
+        .project-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         @media (max-width: 600px) {
             .project-box {
                 flex: 1 1 100%;
@@ -273,6 +294,20 @@
 
             .projects-container {
                 flex-wrap: wrap;
+            }
+
+            .project-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+                height: auto;
+                /* Adjust the height to fit content or maintain aspect ratio */
+            }
+
+            .skills-box,
+            .project-box {
+                height: auto;
+                max-width: 100%;
+                flex: 1 1 100%;
             }
         }
 
@@ -483,6 +518,7 @@
             line-height: 1.6;
         }
 
+
         .skills-box li strong {
             color: #333;
         }
@@ -498,8 +534,8 @@
         .hamburger {
             display: block;
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 30px;
+            right: 36px;
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -514,6 +550,43 @@
             .hamburger {
                 display: block;
             }
+        }
+
+        .project-item h3,
+        .project-item p,
+        .project-item .github-link {
+            position: absolute;
+            left: 50px;
+            bottom: auto;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Optional: Adds background for text readability */
+            padding: 5px;
+            border-radius: 4px;
+            margin: 0;
+            text-align: right;
+        }
+
+        .project-item .github-link {
+            position: absolute;
+            top: 10px;
+            /* Positioning it at the top */
+            left: 50%;
+            /* Centering horizontally */
+            transform: translateX(-50%);
+            /* Adjust for centering */
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #159957;
+            /* Set the font color to green */
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: auto;
+            height: auto;
+            /* Adjust width as needed */
+            text-align: center;
+            /* Center the text */
         }
     </style>
 </head>
@@ -540,7 +613,11 @@
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
         <br>
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/roger-mauvois-29a992208/" target="_blank">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/roger-mauvois-29a992208/" target="_blank">
+                <img src="/assets/In-White-40.png" alt="LinkedIn"
+                    style="width: 40px; height: 40px; margin-right: 30px;">
+            </a>
+
             <a href="https://github.com/Mauvois" target="_blank">
                 <img src="/assets/github-mark-white.png" alt="GitHub" style="width: 40px; height: 40px;">
             </a>
@@ -629,21 +706,19 @@
                 <h2>Projets</h2>
                 <div class="projects-container">
                     <!-- I Ching App Project -->
-                    <div class="project-item" style="background-image: url('/assets/iching-image.png');">
-                        <h3>I Ching App</h3>
-                        <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="github-link">View
-                            Project</a>
-                        <a href="https://github.com/Mauvois/I-Ching-App" target="_blank" class="github-link">GitHub
-                            Code</a>
+                    <div class="project-item">
+                        <img src="/assets/iching-image.png" alt="I Ching App">
+                        <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="github-link"></a>
+                        <a href="https://github.com/Mauvois/I-Ching-App" target="_blank" class="github-link">IChing sur
+                            GitHub</a>
                     </div>
                     <!-- QIP Project -->
-                    <div class="project-item" style="background-image: url('/assets/qip-image.png');">
-                        <h3>QIP</h3>
-                        <video width="320" height="240" controls>
+                    <div class="project-item">
+                        <video controls>
                             <source src="assets/video_qip.mov" type="video/mp4">
                             Votre navigateur ne supporte pas la balise vidéo.
                         </video>
-                        <a href="https://github.com/Mauvois/QIP" target="_blank" class="github-link">GitHub Code</a>
+                        <a href="https://github.com/Mauvois/QIP" target="_blank" class="github-link">QIP sur GitHub</a>
                     </div>
                 </div>
             </div>
