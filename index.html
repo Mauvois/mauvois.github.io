@@ -223,9 +223,7 @@
             height: 300px;
             margin: 10px;
             padding: 0;
-            /* Remove padding */
             border: none;
-            /* Remove borders */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -233,9 +231,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            /* Align content to the top */
             align-items: stretch;
-            /* Make sure children stretch to full width */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-radius: 8px;
@@ -247,19 +243,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Make sure the video and image cover the entire box */
             border-radius: 8px;
-            /* Optional: match the box's rounded corners */
             display: block;
         }
-
 
         .project-item:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-
-
 
         .project-item .github-link {
             position: absolute;
@@ -300,7 +291,6 @@
                 flex: 1 1 100%;
                 max-width: 100%;
                 height: auto;
-                /* Adjust the height to fit content or maintain aspect ratio */
             }
 
             .skills-box,
@@ -308,6 +298,71 @@
                 height: auto;
                 max-width: 100%;
                 flex: 1 1 100%;
+            }
+
+
+        }
+
+        @media (max-width: 600px) {
+
+            /* Ensure the banner is thin and only shows the hamburger and title */
+            .banner {
+                padding: 10px 20px;
+                /* Less padding to make it thin */
+                height: auto;
+                /* Adjust height to fit content */
+                text-align: left;
+                transition: height 0.3s, padding 0.3s;
+            }
+
+            .banner h1,
+            .banner h2 {
+                display: none;
+                /* Hide main headings on small screens */
+            }
+
+            .social-links {
+                display: none;
+                /* Hide social media links on small screens */
+            }
+
+            .site-title {
+                display: block;
+                /* Ensure site title is displayed */
+                font-size: 1.2em;
+                /* Adjust font size for mobile */
+                color: white;
+                /* Maintain color consistency */
+            }
+
+            .navbar ul {
+                display: none;
+                /* Keep the navbar links hidden by default */
+            }
+
+            .banner.fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                padding: 10px 20px;
+                z-index: 1000;
+            }
+
+            .banner.fixed .site-title {
+                font-size: 1.2em;
+            }
+
+            .banner.fixed h1,
+            .banner.fixed h2 {
+                display: none;
+                /* Hide the h1 and h2 headings in the fixed small banner */
+            }
+
+            .hamburger.black {
+                background-color: black;
+                /* Keep the hamburger icon consistent with the banner */
             }
         }
 
@@ -367,6 +422,7 @@
         #contact {
             padding: 60px 20px;
             background-color: #f4f4f4;
+            border-radius: 8px;
             text-align: center;
         }
 
@@ -499,9 +555,7 @@
 
         .project-item:first-child {
             margin-top: 10px;
-            /* Adjust the value to match other project boxes */
         }
-
 
         .skills-box ul {
             flex-grow: 1;
@@ -524,7 +578,6 @@
             line-height: 1.6;
         }
 
-
         .skills-box li strong {
             color: #333;
         }
@@ -539,6 +592,7 @@
 
         .hamburger {
             display: block;
+            /* Always display hamburger */
             position: fixed;
             top: 30px;
             right: 36px;
@@ -548,13 +602,28 @@
             z-index: 1100;
         }
 
+        @media (min-width: 600px) {
+            .modal {
+                display: none !important;
+                /* Ensure modal does not display on larger screens */
+            }
+        }
+
         @media (max-width: 600px) {
-            .navbar {
-                display: none;
+            .modal {
+                display: flex;
+                /* Display modal on small screens */
             }
 
-            .hamburger {
-                display: block;
+            .navbar {
+                display: none;
+                /* Hide navbar on small screens */
+            }
+        }
+
+        @media (min-width: 600px) {
+            .banner .site-title {
+                display: none;
             }
         }
 
@@ -566,7 +635,6 @@
             bottom: auto;
             color: white;
             background-color: rgba(0, 0, 0, 0.6);
-            /* Optional: Adds background for text readability */
             padding: 5px;
             border-radius: 4px;
             margin: 0;
@@ -576,23 +644,61 @@
         .project-item .github-link {
             position: absolute;
             top: 10px;
-            /* Positioning it at the top */
             left: 50%;
-            /* Centering horizontally */
             transform: translateX(-50%);
-            /* Adjust for centering */
             background-color: rgba(255, 255, 255, 0.8);
             color: #159957;
-            /* Set the font color to green */
             border-radius: 4px;
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease;
             width: auto;
             height: auto;
-            /* Adjust width as needed */
             text-align: center;
-            /* Center the text */
+        }
+
+        .modal {
+            display: none;
+            position: absolute;
+            z-index: 2000;
+            left: auto;
+            right: 20px;
+            top: 60px;
+            width: auto;
+            background-color: transparent;
+            justify-content: center;
+            align-items: flex-start;
+            box-shadow: none;
+        }
+
+        .modal-content {
+            background-color: #fefefec6;
+            padding: 5px;
+            border: 1px solid #888;
+            width: 200px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: none;
+        }
+
+        .modal-nav {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-nav li {
+            margin: 10px 0;
+        }
+
+        .modal-nav a {
+            color: #159957;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .modal-nav a:hover {
+            color: #137e56;
         }
     </style>
 </head>
@@ -615,6 +721,9 @@
     </div>
 
     <header class="page-header banner" role="banner">
+        <div class="site-title">
+            <a href="#home">Roger MAUVOIS</a>
+        </div>
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
         <br>
@@ -652,6 +761,7 @@
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/_aEjec4EpHw" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
+
                 </div>
             </div>
         </section>
@@ -758,7 +868,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Smooth scrolling
+            // Smooth scrolling for navbar links
             document.querySelectorAll('.navbar a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -769,7 +879,7 @@
                 });
             });
 
-            // Toggle navbar visibility
+            // Toggle navbar visibility on hamburger click
             document.querySelector('.hamburger').addEventListener('click', function () {
                 var navbar = document.querySelector('.navbar');
                 if (navbar.style.display === 'flex') {
@@ -781,44 +891,107 @@
                 }
             });
 
-            // Change hamburger and navbar link colors on scroll
+            // Manage scroll behavior for different screen sizes
             window.addEventListener('scroll', function () {
                 var hamburger = document.querySelector('.hamburger');
                 var navbar = document.querySelector('.navbar');
-                var bannerHeight = document.querySelector('.banner').offsetHeight;
+                var banner = document.querySelector('.banner');
+                var bannerHeight = banner.offsetHeight;
                 var threshold = bannerHeight / 1.25;
 
-                if (navbar.style.display === 'flex') {
-                    navbar.style.display = 'none';
-                    navbar.classList.remove('menu-open');
-                }
+                if (window.innerWidth >= 600) {
+                    // Scroll behavior for large screens
+                    if (navbar.style.display === 'flex') {
+                        navbar.style.display = 'none';
+                        navbar.classList.remove('menu-open');
+                    }
 
-                if (window.scrollY > 0) {
-                    hamburger.classList.add('hidden');
-                } else {
-                    hamburger.classList.remove('hidden');
-                }
+                    if (window.scrollY > 0) {
+                        hamburger.classList.add('hidden');
+                    } else {
+                        hamburger.classList.remove('hidden');
+                    }
 
-                if (window.scrollY > threshold) {
-                    hamburger.classList.add('black');
-                    navbar.classList.add('black');
-                    navbar.classList.add('expanded');
-                    setTimeout(function () {
-                        document.querySelectorAll('.navbar.expanded ul li a').forEach(function (link) {
-                            link.classList.add('visible');
+                    if (window.scrollY > threshold) {
+                        hamburger.classList.add('black');
+                        navbar.classList.add('black');
+                        navbar.classList.add('expanded');
+                        setTimeout(function () {
+                            document.querySelectorAll('.navbar.expanded ul li a').forEach(function (link) {
+                                link.classList.add('visible');
+                            });
+                        }, 10);
+                    } else {
+                        hamburger.classList.remove('black');
+                        navbar.classList.remove('black');
+                        navbar.classList.remove('expanded');
+                        document.querySelectorAll('.navbar ul li a').forEach(function (link) {
+                            link.classList.remove('visible');
                         });
-                    }, 10);
+                    }
                 } else {
-                    hamburger.classList.remove('black');
-                    navbar.classList.remove('black');
-                    navbar.classList.remove('expanded');
-                    document.querySelectorAll('.navbar ul li a').forEach(function (link) {
-                        link.classList.remove('visible');
-                    });
+                    // Scroll behavior for small screens
+                    if (window.scrollY > threshold) {
+                        banner.style.position = 'fixed';
+                        banner.style.top = '0';
+                        banner.style.left = '0';
+                        banner.style.right = '0';
+                        banner.style.height = '50px'; // Small banner height
+                        banner.style.padding = '10px 20px'; // Adjust padding
+                        banner.style.transition = 'height 0.3s, padding 0.3s'; // Smooth transition
+                        document.querySelector('.banner h1').style.display = 'none'; // Hide main heading
+                        document.querySelector('.banner h2').style.display = 'none'; // Hide subheading
+                        document.querySelector('.site-title').style.fontSize = '1.2em'; // Adjust title size
+                        document.querySelector('.hamburger').classList.add('black'); // Change hamburger color
+                    } else {
+                        banner.style.position = 'relative'; // Restore banner position
+                        banner.style.height = 'auto'; // Restore original height
+                        banner.style.padding = '10px 20px'; // Restore original padding
+                        document.querySelector('.banner h1').style.display = 'block'; // Show main heading
+                        document.querySelector('.banner h2').style.display = 'block'; // Show subheading
+                        document.querySelector('.site-title').style.fontSize = '1.5em'; // Original title size
+                        document.querySelector('.hamburger').classList.remove('black'); // Original hamburger color
+                    }
+                }
+            });
+
+            var hamburger = document.querySelector('.hamburger');
+            var modal = document.getElementById('navbar-modal');
+            var closeButton = document.querySelector('.close-button');
+
+            // Display the modal only on small screens
+            hamburger.addEventListener('click', function () {
+                if (window.innerWidth < 600) {
+                    modal.style.display = 'flex';
+                } else {
+                    modal.style.display = 'none'; // Ensure the modal does not show on larger screens
+                }
+            });
+
+            closeButton.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+
+            // Close the modal when clicking anywhere outside of the modal content
+            window.addEventListener('click', function (event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
                 }
             });
         });
     </script>
+    <div id="navbar-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <ul class="modal-nav">
+                <li><a href="#about">Qui suis-je?</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
 </body>
 
 </html>
