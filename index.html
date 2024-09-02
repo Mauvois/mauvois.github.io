@@ -109,7 +109,7 @@
         }
 
         .navbar .site-title {
-            display: none;
+            display: block;
         }
 
         .navbar.expanded .site-title {
@@ -498,6 +498,11 @@
             .modal {
                 display: none !important;
             }
+
+            .navbar .site-title {
+                display: none;
+                /* Hide navbar title on large screens */
+            }
         }
 
         .site-title a {
@@ -723,6 +728,31 @@
                 document.querySelector('.banner h1').style.display = 'block';
                 document.querySelector('.banner h2').style.display = 'block';
                 document.querySelector('.site-title').style.fontSize = '1.5em';
+                document.querySelector('.site-title').style.display = 'none'; // Hide title by default
+                hamburger.classList.remove('hidden');
+            }
+
+            function resetToSmallScreen() {
+                // Reset banner to small screen styles
+                banner.style.position = 'fixed';
+                banner.style.top = '0';
+                banner.style.left = '0';
+                banner.style.right = '0';
+                banner.style.height = '80px'; // Thin banner for small screens
+                banner.style.padding = '10px 20px';
+
+                document.querySelector('.banner h1').style.display = 'none';
+                document.querySelector('.banner h2').style.display = 'none';
+                document.querySelector('.site-title').style.fontSize = '1.2em';
+                document.querySelector('.site-title').style.display = 'block'; // Show title on small screens
+
+                // Hide large screen navbar
+                navbar.style.display = 'none';
+                navbar.classList.remove('menu-open');
+                navbar.classList.remove('expanded');
+                navbar.classList.remove('black');
+
+                // Show hamburger menu icon
                 hamburger.classList.remove('hidden');
             }
 
@@ -749,20 +779,26 @@
             });
 
             function adjustPaddingForFixedBanner() {
-                var bannerHeight = document.querySelector('.banner').offsetHeight;
+                var bannerHeight = banner.offsetHeight;
                 document.querySelector('main').style.paddingTop = bannerHeight + 'px';
             }
 
             // Manage scroll behavior for different screen sizes
             function handleScroll() {
+                var navbarTitle = document.querySelector('.navbar .site-title');
+
                 if (window.innerWidth >= 600) {
                     // Scroll behavior for large screens
-                    if (navbar.style.display === 'flex') {
-                        navbar.style.display = 'none';
-                        navbar.classList.remove('menu-open');
-                    }
-
                     if (window.scrollY > threshold) {
+                        banner.style.position = 'fixed';
+                        banner.style.top = '0';
+                        banner.style.left = '0';
+                        banner.style.right = '0';
+                        banner.style.height = '80px'; // Maintain 80px height when scrolled
+                        banner.style.padding = '10px 20px';
+                        document.querySelector('.banner h1').style.display = 'none';
+                        document.querySelector('.banner h2').style.display = 'none';
+                        document.querySelector('.site-title').style.display = 'block'; // Show title when scrolled
                         hamburger.classList.add('hidden');
                         navbar.classList.add('black');
                         navbar.classList.add('expanded');
@@ -781,12 +817,7 @@
                     }
                 } else {
                     // Fixed thin banner for small screens
-                    banner.style.position = 'fixed';
-                    banner.style.top = '0';
-                    banner.style.left = '0';
-                    banner.style.right = '0';
-                    banner.style.height = '80px';
-
+                    resetToSmallScreen();
                     adjustPaddingForFixedBanner();
                 }
             }
@@ -794,9 +825,13 @@
             // Add scroll event listener
             window.addEventListener('scroll', handleScroll);
 
-            // Add resize event listener to reset banner when switching between screen sizes
+            // Combine resize handling into one function
             window.addEventListener('resize', function () {
-                resetBanner(); // Reset banner to default on resize
+                if (window.innerWidth < 600) {
+                    resetToSmallScreen(); // Reset to small screen styles
+                } else {
+                    resetBanner(); // Reset to large screen styles
+                }
                 handleScroll(); // Re-evaluate scroll behavior on resize
             });
 
