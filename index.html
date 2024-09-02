@@ -16,7 +16,14 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
     <style>
-        /* Additional styles for section layout */
+        /* Basic Layout */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         section {
             padding: 3%;
             scroll-margin-top: 80px;
@@ -28,15 +35,7 @@
             text-align: center;
         }
 
-        .skills-container,
-        .projects-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 20px;
-        }
-
+        /* Navbar Styles */
         .navbar {
             position: fixed;
             top: 0;
@@ -66,6 +65,24 @@
             padding-top: 50px;
         }
 
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        .navbar ul li {
+            margin: 10px 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, opacity 0.5s ease;
+        }
+
         .navbar.expanded ul {
             display: flex;
             justify-content: space-around;
@@ -88,33 +105,23 @@
             opacity: 1;
         }
 
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            text-align: right;
-        }
-
-        .navbar ul li {
-            margin: 10px 0;
-        }
-
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s, opacity 0.5s ease;
-        }
-
         .navbar.black ul li a {
             color: white;
         }
 
+        .navbar .site-title {
+            display: none;
+        }
+
+        .navbar.expanded .site-title {
+            display: block;
+        }
+
+        /* Hamburger Menu Styles */
         .hamburger {
             position: fixed;
             top: 20px;
             right: 20px;
-            display: block;
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -137,12 +144,14 @@
             display: none;
         }
 
+        /* Banner Styles */
         .banner {
             background-color: #159957;
             background-image: linear-gradient(120deg, #155799, #159957);
             color: white;
             padding: 60px 20px;
             text-align: center;
+            transition: height 0.3s, padding 0.3s;
         }
 
         .banner h1 {
@@ -170,6 +179,16 @@
             font-weight: bold;
         }
 
+        /* Skills and Projects Containers */
+        .skills-container,
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 20px;
+        }
+
         .skills-box,
         .project-box {
             background-color: #f9f9f9;
@@ -189,34 +208,26 @@
             justify-content: space-between;
         }
 
-        .project-box:first-child {
-            margin: 10px;
+        .skills-box ul,
+        .project-box ul {
+            flex-grow: 1;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
         }
 
-        .site-title a {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            display: inline-block;
-            transition: color 0.3s ease;
+        .skills-box h3,
+        .project-box h3 {
+            margin-bottom: 10px;
         }
 
-        .project-box img,
-        .project-box video {
-            max-height: 100%;
-            width: 100%;
-            object-fit: cover;
+        .skills-box p,
+        .project-box p {
+            margin-top: auto;
+            margin-bottom: 10px;
         }
 
-        .projects-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
+        /* Project Items */
         .project-item {
             flex: 1 1 calc(45% - 20px);
             max-width: calc(45% - 20px);
@@ -270,137 +281,7 @@
             color: white;
         }
 
-        .project-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 600px) {
-            .project-box {
-                flex: 1 1 100%;
-                max-width: 100%;
-                height: 400px;
-            }
-
-            .projects-container {
-                flex-wrap: wrap;
-            }
-
-            .project-item {
-                flex: 1 1 100%;
-                max-width: 100%;
-                height: auto;
-            }
-
-            .skills-box,
-            .project-box {
-                height: auto;
-                max-width: 100%;
-                flex: 1 1 100%;
-            }
-
-
-        }
-
-        @media (max-width: 600px) {
-
-            /* Ensure the banner is thin and only shows the hamburger and title */
-            .banner {
-                padding: 10px 20px;
-                /* Less padding to make it thin */
-                height: auto;
-                /* Adjust height to fit content */
-                text-align: left;
-                transition: height 0.3s, padding 0.3s;
-            }
-
-            .banner h1,
-            .banner h2 {
-                display: none;
-                /* Hide main headings on small screens */
-            }
-
-            .social-links {
-                display: none;
-                /* Hide social media links on small screens */
-            }
-
-            .site-title {
-                display: block;
-                /* Ensure site title is displayed */
-                font-size: 1.2em;
-                /* Adjust font size for mobile */
-                color: white;
-                /* Maintain color consistency */
-            }
-
-            .navbar ul {
-                display: none;
-                /* Keep the navbar links hidden by default */
-            }
-
-            .banner.fixed {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 50px;
-                padding: 10px 20px;
-                z-index: 1000;
-            }
-
-            .banner.fixed .site-title {
-                font-size: 1.2em;
-            }
-
-            .banner.fixed h1,
-            .banner.fixed h2 {
-                display: none;
-                /* Hide the h1 and h2 headings in the fixed small banner */
-            }
-
-            .hamburger.black {
-                background-color: black;
-                /* Keep the hamburger icon consistent with the banner */
-            }
-        }
-
-        .site-title a:hover {
-            color: #159957;
-        }
-
-        .navbar .site-title {
-            display: none;
-        }
-
-        .navbar.expanded .site-title {
-            display: block;
-        }
-
-        .hamburger.hidden {
-            display: none;
-        }
-
-        .project-box h3,
-        .project-box p {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: none;
-            color: white;
-            margin: 0;
-            padding: 10px;
-        }
-
-        .project-box h3 {
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            background: none;
-        }
-
+        /* Video Container */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -419,6 +300,7 @@
             height: 100%;
         }
 
+        /* Contact Form */
         #contact {
             padding: 60px 20px;
             background-color: #f4f4f4;
@@ -479,19 +361,7 @@
         }
 
         textarea {
-            width: 100%;
-            padding: 15px 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            transition: all 0.3s ease;
             resize: none;
-        }
-
-        textarea:focus {
-            border-color: #159957;
-            background-color: #fff;
         }
 
         .btn {
@@ -509,154 +379,7 @@
             background-color: #137e56;
         }
 
-        @media (max-width: 600px) {
-            .form-group {
-                flex-direction: column;
-            }
-
-            .skills-box,
-            .project-box {
-                height: auto;
-                max-width: 100%;
-                flex: 1 1 100%;
-            }
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 20px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-        }
-
-        .skills-box {
-            flex: 1 1 45%;
-            min-width: 200px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: auto;
-        }
-
-        .skills-box:first-child {
-            margin: 10px;
-        }
-
-        .project-item:first-child {
-            margin-top: 10px;
-        }
-
-        .skills-box ul {
-            flex-grow: 1;
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        .skills-box h3 {
-            margin-bottom: 10px;
-        }
-
-        .skills-box p {
-            margin-top: auto;
-            margin-bottom: 10px;
-        }
-
-        .skills-box li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .skills-box li strong {
-            color: #333;
-        }
-
-        .navbar {
-            display: none;
-            flex-direction: column;
-            align-items: right;
-            padding: 10px 20px;
-            transition: background-color 0.5s ease;
-        }
-
-        .hamburger {
-            display: block;
-            /* Always display hamburger */
-            position: fixed;
-            top: 30px;
-            right: 36px;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            z-index: 1100;
-        }
-
-        @media (min-width: 600px) {
-            .modal {
-                display: none !important;
-                /* Ensure modal does not display on larger screens */
-            }
-        }
-
-        @media (max-width: 600px) {
-            .modal {
-                display: flex;
-                /* Display modal on small screens */
-            }
-
-            .navbar {
-                display: none;
-                /* Hide navbar on small screens */
-            }
-        }
-
-        @media (min-width: 600px) {
-            .banner .site-title {
-                display: none;
-            }
-        }
-
-        .project-item h3,
-        .project-item p,
-        .project-item .github-link {
-            position: absolute;
-            left: 50px;
-            bottom: auto;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 5px;
-            border-radius: 4px;
-            margin: 0;
-            text-align: right;
-        }
-
-        .project-item .github-link {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #159957;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            width: auto;
-            height: auto;
-            text-align: center;
-        }
-
+        /* Modal Styles */
         .modal {
             display: none;
             position: absolute;
@@ -699,6 +422,117 @@
 
         .modal-nav a:hover {
             color: #137e56;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+
+            .project-box,
+            .skills-box,
+            .project-item,
+            .skills-container,
+            .projects-container {
+                flex: 1 1 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .banner {
+                padding: 10px 20px;
+                height: auto;
+                text-align: left;
+                transition: height 0.3s, padding 0.3s;
+            }
+
+            .banner h1,
+            .banner h2,
+            .social-links {
+                display: none;
+            }
+
+            .site-title {
+                display: block;
+                font-size: 1.2em;
+                color: white;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+            .banner.fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                padding: 10px 20px;
+                z-index: 1000;
+            }
+
+            .hamburger {
+                top: 30px;
+                right: 36px;
+            }
+
+            .modal {
+                display: flex;
+            }
+
+            .navbar {
+                display: none;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .banner .site-title {
+                display: none;
+            }
+
+            .modal {
+                display: none !important;
+            }
+        }
+
+        .site-title a {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .site-title a:hover {
+            color: #159957;
+        }
+
+        .project-item h3,
+        .project-item p,
+        .project-item .github-link {
+            position: absolute;
+            left: 50px;
+            bottom: auto;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 5px;
+            border-radius: 4px;
+            margin: 0;
+            text-align: right;
+        }
+
+        .project-item .github-link {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #159957;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
     </style>
 </head>
