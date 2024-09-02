@@ -766,21 +766,17 @@
                         });
                     }
                 } else {
-                    // Scroll behavior for small screens
-                    if (window.scrollY > threshold) {
-                        banner.style.position = 'fixed';
-                        banner.style.top = '0';
-                        banner.style.left = '0';
-                        banner.style.right = '0';
-                        banner.style.height = '50px'; // Small banner height
-                        banner.style.padding = '10px 20px'; // Adjust padding
-                        banner.style.transition = 'height 0.3s, padding 0.3s'; // Smooth transition
-                        document.querySelector('.banner h1').style.display = 'none'; // Hide main heading
-                        document.querySelector('.banner h2').style.display = 'none'; // Hide subheading
-                        document.querySelector('.site-title').style.fontSize = '1.2em'; // Adjust title size
-                    } else {
-                        resetBanner(); // Reset banner to default when scrolling up
-                    }
+                    // Fixed thin banner for small screens
+                    banner.style.position = 'fixed';
+                    banner.style.top = '0';
+                    banner.style.left = '0';
+                    banner.style.right = '0';
+                    banner.style.height = '50px'; // Set thin banner height
+                    banner.style.padding = '10px 20px'; // Consistent padding for small screens
+                    banner.style.transition = 'height 0.3s, padding 0.3s'; // Smooth transition
+                    document.querySelector('.banner h1').style.display = 'none'; // Hide main heading
+                    document.querySelector('.banner h2').style.display = 'none'; // Hide subheading
+                    document.querySelector('.site-title').style.fontSize = '1.2em'; // Adjust title size
                 }
             }
 
