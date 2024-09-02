@@ -436,6 +436,10 @@
                 height: auto;
             }
 
+            /* body {
+                padding-top: 80px;
+            } */
+
 
 
             .banner {
@@ -744,6 +748,11 @@
                 }
             });
 
+            function adjustPaddingForFixedBanner() {
+                var bannerHeight = document.querySelector('.banner').offsetHeight;
+                document.querySelector('main').style.paddingTop = bannerHeight + 'px';
+            }
+
             // Manage scroll behavior for different screen sizes
             function handleScroll() {
                 if (window.innerWidth >= 600) {
@@ -776,7 +785,9 @@
                     banner.style.top = '0';
                     banner.style.left = '0';
                     banner.style.right = '0';
-                    banner.style.height = '80px'; // Set thin banner height
+                    banner.style.height = '80px';
+
+                    adjustPaddingForFixedBanner();
                 }
             }
 
