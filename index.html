@@ -136,9 +136,6 @@
             transition: all 0.3s;
         }
 
-        .hamburger.black div {
-            background-color: black;
-        }
 
         .hamburger.hidden {
             display: none;
@@ -476,7 +473,7 @@
             }
 
             .modal {
-                display: flex;
+                display: none;
             }
 
             .navbar {
@@ -702,6 +699,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            var banner = document.querySelector('.banner');
+            var hamburger = document.querySelector('.hamburger');
+            var navbar = document.querySelector('.navbar');
+            var modal = document.getElementById('navbar-modal');
+            var closeButton = document.querySelector('.close-button');
+            var threshold = banner.offsetHeight / 1.25;
+
+            // Function to reset the banner to its default state
+            function resetBanner() {
+                banner.style.position = 'relative';
+                banner.style.height = 'auto';
+                banner.style.padding = '60px 20px';
+                document.querySelector('.banner h1').style.display = 'block';
+                document.querySelector('.banner h2').style.display = 'block';
+                document.querySelector('.site-title').style.fontSize = '1.5em';
+                hamburger.classList.remove('hidden');
+            }
+
             // Smooth scrolling for navbar links
             document.querySelectorAll('.navbar a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -709,13 +724,12 @@
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
-                    document.querySelector('.navbar').style.display = 'none';
+                    navbar.style.display = 'none';
                 });
             });
 
             // Toggle navbar visibility on hamburger click
-            document.querySelector('.hamburger').addEventListener('click', function () {
-                var navbar = document.querySelector('.navbar');
+            hamburger.addEventListener('click', function () {
                 if (navbar.style.display === 'flex') {
                     navbar.style.display = 'none';
                     navbar.classList.remove('menu-open');
@@ -726,13 +740,7 @@
             });
 
             // Manage scroll behavior for different screen sizes
-            window.addEventListener('scroll', function () {
-                var hamburger = document.querySelector('.hamburger');
-                var navbar = document.querySelector('.navbar');
-                var banner = document.querySelector('.banner');
-                var bannerHeight = banner.offsetHeight;
-                var threshold = bannerHeight / 1.25;
-
+            function handleScroll() {
                 if (window.innerWidth >= 600) {
                     // Scroll behavior for large screens
                     if (navbar.style.display === 'flex') {
@@ -740,14 +748,8 @@
                         navbar.classList.remove('menu-open');
                     }
 
-                    if (window.scrollY > 0) {
-                        hamburger.classList.add('hidden');
-                    } else {
-                        hamburger.classList.remove('hidden');
-                    }
-
                     if (window.scrollY > threshold) {
-                        hamburger.classList.add('black');
+                        hamburger.classList.add('hidden');
                         navbar.classList.add('black');
                         navbar.classList.add('expanded');
                         setTimeout(function () {
@@ -756,7 +758,7 @@
                             });
                         }, 10);
                     } else {
-                        hamburger.classList.remove('black');
+                        resetBanner(); // Reset banner to default state
                         navbar.classList.remove('black');
                         navbar.classList.remove('expanded');
                         document.querySelectorAll('.navbar ul li a').forEach(function (link) {
@@ -776,22 +778,20 @@
                         document.querySelector('.banner h1').style.display = 'none'; // Hide main heading
                         document.querySelector('.banner h2').style.display = 'none'; // Hide subheading
                         document.querySelector('.site-title').style.fontSize = '1.2em'; // Adjust title size
-                        document.querySelector('.hamburger').classList.add('black'); // Change hamburger color
                     } else {
-                        banner.style.position = 'relative'; // Restore banner position
-                        banner.style.height = 'auto'; // Restore original height
-                        banner.style.padding = '10px 20px'; // Restore original padding
-                        document.querySelector('.banner h1').style.display = 'block'; // Show main heading
-                        document.querySelector('.banner h2').style.display = 'block'; // Show subheading
-                        document.querySelector('.site-title').style.fontSize = '1.5em'; // Original title size
-                        document.querySelector('.hamburger').classList.remove('black'); // Original hamburger color
+                        resetBanner(); // Reset banner to default when scrolling up
                     }
                 }
-            });
+            }
 
-            var hamburger = document.querySelector('.hamburger');
-            var modal = document.getElementById('navbar-modal');
-            var closeButton = document.querySelector('.close-button');
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
+
+            // Add resize event listener to reset banner when switching between screen sizes
+            window.addEventListener('resize', function () {
+                resetBanner(); // Reset banner to default on resize
+                handleScroll(); // Re-evaluate scroll behavior on resize
+            });
 
             // Display the modal only on small screens
             hamburger.addEventListener('click', function () {
