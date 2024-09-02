@@ -20,7 +20,6 @@
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
@@ -149,6 +148,7 @@
             padding: 60px 20px;
             text-align: center;
             transition: height 0.3s, padding 0.3s;
+            z-index: 400;
         }
 
         .banner h1 {
@@ -379,7 +379,7 @@
         /* Modal Styles */
         .modal {
             display: none;
-            position: absolute;
+            position: fixed;
             z-index: 2000;
             left: auto;
             right: 20px;
@@ -392,10 +392,10 @@
         }
 
         .modal-content {
-            background-color: #fefefec6;
+            background-color: #fefefe;
             padding: 5px;
             border: 1px solid #888;
-            width: 200px;
+            width: auto;
             border-radius: 8px;
             text-align: center;
             box-shadow: none;
@@ -421,6 +421,8 @@
             color: #137e56;
         }
 
+
+
         /* Responsive Styles */
         @media (max-width: 600px) {
 
@@ -434,11 +436,13 @@
                 height: auto;
             }
 
+
+
             .banner {
                 padding: 10px 20px;
-                height: auto;
+                height: 80px;
                 text-align: left;
-                transition: height 0.3s, padding 0.3s;
+                /* transition: height 0.3s, padding 0.3s; */
             }
 
             .banner h1,
@@ -462,9 +466,10 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 50px;
+                height: 80px;
                 padding: 10px 20px;
-                z-index: 1000;
+                z-index: 10001;
+                box-sizing: border-box;
             }
 
             .hamburger {
@@ -771,12 +776,7 @@
                     banner.style.top = '0';
                     banner.style.left = '0';
                     banner.style.right = '0';
-                    banner.style.height = '50px'; // Set thin banner height
-                    banner.style.padding = '10px 20px'; // Consistent padding for small screens
-                    banner.style.transition = 'height 0.3s, padding 0.3s'; // Smooth transition
-                    document.querySelector('.banner h1').style.display = 'none'; // Hide main heading
-                    document.querySelector('.banner h2').style.display = 'none'; // Hide subheading
-                    document.querySelector('.site-title').style.fontSize = '1.2em'; // Adjust title size
+                    banner.style.height = '80px'; // Set thin banner height
                 }
             }
 
