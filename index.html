@@ -2,20 +2,50 @@
 ---
 
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en-US' }}">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    {% seo %}
-    <link rel="icon" href="{{ '/_assets/favicon.jpg' | relative_url }}" type="image/jpeg">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
-        type="text/css" crossorigin>
+    <title>Roger Mauvois - Développeur Fullstack, Spécialiste en Machine Learning et IA</title>
+    <meta name="description"
+        content="Développeur fullstack spécialisé en gestion de données, Machine Learning et IA. Découvrez mes compétences et projets innovants. Contactez-moi pour des collaborations fructueuses.">
+    <meta name="keywords"
+        content="Développeur fullstack, Machine Learning, Intelligence Artificielle, Python, Django, FastAPI, Data Science, GCP, IA, Roger Mauvois">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="canonical" href="https://mauvois.github.io/">
+    <link rel="icon" href="{{ '/_assets/copie_favicon.png' | relative_url }}" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
+        type="text/css" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Roger Mauvois - Développeur Fullstack, Spécialiste en Machine Learning et IA">
+    <meta property="og:description"
+        content="Découvrez les compétences et projets de Roger Mauvois, développeur fullstack spécialisé en IA et Machine Learning.">
+    <meta property="og:image" content="https://mauvois.github.io/assets/og-image.jpg">
+    <meta property="og:url" content="https://mauvois.github.io/">
+    <meta property="og:type" content="website">
+
+    <!-- Structured Data (Schema Markup) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Roger Mauvois",
+      "jobTitle": "Développeur Fullstack",
+      "url": "https://mauvois.github.io/",
+      "sameAs": [
+        "https://www.linkedin.com/in/roger-mauvois-29a992208/",
+        "https://github.com/Mauvois"
+      ],
+      "image": "https://mauvois.github.io/assets/profile-pic.jpg",
+      "description": "Spécialiste en gestion de données, Machine Learning et IA."
+    }
+    </script>
     <style>
         /* Basic Layout */
         body {
@@ -229,9 +259,7 @@
         .project-item {
             flex: 1 1 calc(45% - 20px);
             max-width: calc(45% - 20px);
-            height: 300px;
-            margin: 10px;
-            padding: 0;
+            height: 100%;
             border: none;
             background-size: cover;
             background-position: center;
@@ -240,7 +268,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            align-items: stretch;
+            align-items: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-radius: 8px;
@@ -250,7 +278,7 @@
         .project-item img,
         .project-item video {
             width: 100%;
-            height: 100%;
+            height: 250px;
             object-fit: cover;
             border-radius: 8px;
             display: block;
@@ -264,7 +292,8 @@
         .project-item .github-link {
             position: absolute;
             bottom: 10px;
-            right: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background-color: rgba(255, 255, 255, 0.8);
             color: #159957;
             padding: 8px 12px;
@@ -272,11 +301,24 @@
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            display: inline-block;
+            /* Make sure the link acts as a block element */
         }
 
         .project-item .github-link:hover {
             background-color: #159957;
             color: white;
+        }
+
+        .project-box:first-child {
+            margin-top: 20px;
+        }
+
+        .skills-box:first-child {
+            margin: 10px;
         }
 
         /* Video Container */
@@ -669,12 +711,16 @@
                 <div class="projects-container">
                     <!-- I Ching App Project -->
                     <div class="project-item">
-                        <img src="/assets/iching-image.png" alt="I Ching App">
-                        <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="github-link"></a>
+                        <!-- Outer link for the entire box -->
+                        <a href="https://frontend-5ols2im5la-ew.a.run.app/" target="_blank" class="project-link">
+                            <img src="/assets/iching-image.png" alt="I Ching App">
+                        </a>
+                        <!-- Inner link specifically for the GitHub button -->
                         <a href="https://github.com/Mauvois/I-Ching-App" target="_blank" class="github-link">IChing sur
                             GitHub</a>
                     </div>
-                    <!-- QIP Project -->
+
+                    <!-- QIP Project (remains unchanged) -->
                     <div class="project-item">
                         <video controls>
                             <source src="assets/video_qip.mov" type="video/mp4">
