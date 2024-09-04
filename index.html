@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     {% seo %}
+    <link rel="icon" href="{{ '/_assets/favicon.jpg' | relative_url }}" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
         type="text/css" crossorigin>
@@ -767,6 +768,14 @@
                 });
             });
 
+            // Close the modal when clicking anywhere outside of the modal content
+            window.addEventListener('click', function (event) {
+                if (modal.style.display === 'flex' && !modal.contains(event.target) && !hamburger.contains(event.target)) {
+                    modal.style.display = 'none';
+                }
+            });
+
+
             // Toggle navbar visibility on hamburger click
             hamburger.addEventListener('click', function () {
                 if (navbar.style.display === 'flex') {
@@ -791,7 +800,7 @@
                     // Scroll behavior for large screens
                     if (window.scrollY > threshold) {
                         banner.style.position = 'fixed';
-                        banner.style.top = '0';
+                        banner.style.top = '-10px';
                         banner.style.left = '0';
                         banner.style.right = '0';
                         banner.style.height = '80px'; // Maintain 80px height when scrolled
@@ -807,6 +816,8 @@
                                 link.classList.add('visible');
                             });
                         }, 10);
+
+                        adjustPaddingForFixedBanner(); // Adjust padding when banner is fixed
                     } else {
                         resetBanner(); // Reset banner to default state
                         navbar.classList.remove('black');
@@ -814,6 +825,7 @@
                         document.querySelectorAll('.navbar ul li a').forEach(function (link) {
                             link.classList.remove('visible');
                         });
+                        document.querySelector('main').style.paddingTop = '0'; // Reset padding when banner is not fixed
                     }
                 } else {
                     // Fixed thin banner for small screens
@@ -844,21 +856,18 @@
                 }
             });
 
-            closeButton.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
 
             // Close the modal when clicking anywhere outside of the modal content
             window.addEventListener('click', function (event) {
-                if (event.target == modal) {
+                if (modal.style.display === 'flex' && !modal.contains(event.target) && !hamburger.contains(event.target)) {
                     modal.style.display = 'none';
                 }
             });
+
         });
     </script>
     <div id="navbar-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
             <ul class="modal-nav">
                 <li><a href="#about">Qui suis-je?</a></li>
                 <li><a href="#skills">Compétences</a></li>
